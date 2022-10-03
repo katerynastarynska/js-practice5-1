@@ -7,7 +7,7 @@ const fetchTeachers = fetch('http://localhost:3000/teachers')
             teachers.map((teacher) => {
                 teacherRow.insertAdjacentHTML('beforeend', teacherCard(teacher))
             })
-        }))
+        })).catch((error) => console.log(error))
 
 const teacherCard = (teacher) => {
     return `
@@ -33,9 +33,7 @@ const teacherCard = (teacher) => {
 const fetchStudents = async () => {
     const data = await fetch('http://localhost:3000/students')
     const students = await data.json()
-    for (let i = 0; i < students.length; i += 1) {
-        renderStudent(students[i]);
-    }
+    students.forEach(student => renderStudent(student))
 }
 fetchStudents()
 
